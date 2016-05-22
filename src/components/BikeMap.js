@@ -9,6 +9,8 @@ import {
 import MapView from 'react-native-maps';
 import { DOMParser } from 'xmldom';
 
+import CalloutText from './CalloutText';
+
 export default class BikeMap extends Component {
   constructor() {
     super();
@@ -34,10 +36,10 @@ export default class BikeMap extends Component {
 				for (let i = 0; i < locations.length; ++i) {
 					const long = parseFloat(locations[i].getElementsByTagName('Longitude')[0].textContent);
 					const lat = parseFloat(locations[i].getElementsByTagName('Latitude')[0].textContent);
-					const id = locations[i].getElementsByTagName('Id')[0].textContent;
+					const id = parseInt(locations[i].getElementsByTagName('Id')[0].textContent);
 					const address = locations[i].getElementsByTagName('Address')[0].textContent;
-					const bikes = locations[i].getElementsByTagName('Bikes')[0].textContent;
-					const dockings = locations[i].getElementsByTagName('Dockings')[0].textContent;
+					const bikes = parseInt(locations[i].getElementsByTagName('Bikes')[0].textContent);
+					const dockings = parseInt(locations[i].getElementsByTagName('Dockings')[0].textContent);
           // Lazy way to check for bad data
 					if (long){
 						locationList.push({long,lat,id,address,bikes,dockings});						
@@ -83,12 +85,7 @@ export default class BikeMap extends Component {
               title={location.address}
             >
               <MapView.Callout>
-                		<View>
-                      <Text>Station: {location.stationId}</Text>
-                      <Text>Address: {location.address}</Text>
-                      <Text>Bikes: {location.bikes}</Text>
-                      <Text>Dockings: {location.dockings}</Text>
-                    </View>
+						  	<CalloutText stationId={location.id} address={location.address} bikes={location.bikes} dockings={location.dockings} />
               </MapView.Callout>
             </MapView.Marker>
           )})}
