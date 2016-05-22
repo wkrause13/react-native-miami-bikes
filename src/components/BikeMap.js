@@ -22,7 +22,7 @@ export default class BikeMap extends Component {
     this.fetchLocations = this.fetchLocations.bind(this);
   }
 	fetchLocations() {
-		const url = 'http://citibikemiami.com/downtown-miami-locations3.xml';
+		const url = 'http://citibikemiami.com/downtown-miami-locations2.xml';
 		fetch(url, { method: 'GET',
 							mode: 'cors',
 							cache: 'default' })
@@ -43,6 +43,7 @@ export default class BikeMap extends Component {
 						locationList.push({long,lat,id,address,bikes,dockings});						
 					}
 				};
+        console.log(locationList);
 				this.setState({locations: locationList});
 			})
 		.catch((e) =>{
@@ -72,7 +73,26 @@ export default class BikeMap extends Component {
           }}
           showsUserLocation
           followsUserLocation
-        />
+        >
+          {this.state.locations.map(location => {
+            console.log(location);
+            return (
+            <MapView.Marker
+              key={location.id} 
+              coordinate={{latitude:location.lat, longitude:location.long}}
+              title={location.address}
+            >
+              <MapView.Callout>
+                		<View>
+                      <Text>Station: {location.stationId}</Text>
+                      <Text>Address: {location.address}</Text>
+                      <Text>Bikes: {location.bikes}</Text>
+                      <Text>Dockings: {location.dockings}</Text>
+                    </View>
+              </MapView.Callout>
+            </MapView.Marker>
+          )})}
+        </MapView>
         <Text style={styles.errorText}>{this.state.errorMsg}</Text>
       </View>
     );
