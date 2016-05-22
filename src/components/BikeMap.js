@@ -78,7 +78,6 @@ export default class BikeMap extends Component {
           followsUserLocation
         >
           {this.state.locations.map(location => {
-            console.log(location);
             return (
             <MapView.Marker
               key={location.id} 
