@@ -6,6 +6,9 @@ bike and docking availability at each location. The offical version of the app
 is consistently broken (at least on Android), so if you ever want to use
 Citibike in Miami, this app solves a real problem. 
 
+## App Image
+![example image](example_image.png)
+
 ## Installation
 This project uses the
 [react-native-maps](https://github.com/lelandrichardson/react-native-maps)
