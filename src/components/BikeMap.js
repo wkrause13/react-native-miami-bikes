@@ -3,7 +3,8 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  TouchableHighlight,
 } from 'react-native';
 
 import MapView from 'react-native-maps';
@@ -91,6 +92,11 @@ export default class BikeMap extends Component {
           )})}
         </MapView>
         <Text style={styles.errorText}>{this.state.errorMsg}</Text>
+        <TouchableHighlight onPress={this.fetchLocations}>
+					<View style={styles.button}>
+						<Text style={{color:'white'}}>Refresh</Text>
+					</View>
+				</TouchableHighlight>
       </View>
     );
   }
@@ -99,7 +105,7 @@ export default class BikeMap extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
@@ -113,5 +119,12 @@ const styles = StyleSheet.create({
   errorText: {
     color: 'red',
     fontSize: 30,
-  }
+  },
+  button: {
+		width: 80,
+		height: 30,
+		backgroundColor: 'blue',
+		alignItems: 'center',
+		justifyContent:'center',
+	},
 });
