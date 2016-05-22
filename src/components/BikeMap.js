@@ -46,7 +46,6 @@ export default class BikeMap extends Component {
 						locationList.push({long,lat,id,address,bikes,dockings});						
 					}
 				};
-        console.log(locationList);
 				this.setState({locations: locationList});
 			})
 		.catch((e) =>{
